@@ -215,7 +215,7 @@ pub const Request = struct {
         if (method.hasPayload() == .no and payload != null) return error.MustOmitPayload;
 
         const path = if (self.uri.path.len != 0) self.uri.path else "/";
-        try self.client.writeStatusLineParts(method.name(), path orelse "/", self.uri.query, self.uri.fragment);
+        try self.client.writeStatusLineParts(method.name(), path, self.uri.query, self.uri.fragment);
 
         if (headers == null or !headers.?.contains("Host")) {
             try self.client.writeHeaderValue("Host", self.uri.host.?);
